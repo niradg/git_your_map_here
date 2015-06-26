@@ -6,6 +6,8 @@
 	<meta charset="utf-8" />
 	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.standalone.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -20,8 +22,11 @@
         
 
         //Code to add Basemap
-        var latimes = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png').addTo(map);
-   
+        var latimes = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png').addTo(map);
+		// Provide your access token
+		//L.mapbox.accessToken = 'pk.eyJ1IjoibmlyYWQiLCJhIjoiX2p2SHZqSSJ9.ThRVlpLS3_XUpKVHnMOUuQ';
+		// Create a map in the div #map
+		//var latimes =  L.mapbox.map('map', 'nirad.map-ppff4vo5');
         //Create locations for geojson
         var nc_boundaries="data/nc_boundaries.geojson";
         var nc_locations="data/nc_locations.geojson";
@@ -30,9 +35,9 @@
         var ncboundaries = $.getJSON(nc_boundaries, function(data) {
         L.geoJson(data, {
                 style:{
-                fillColor:"#ff7f00",
-                color: "#ff7f00",
-                weight: 1,
+                fillColor:"orange",
+                color: "red",
+                weight: 3,
                 opacity: 1,
                 fillOpacity: 0.2,
                 clickable: false
@@ -45,7 +50,7 @@
         L.geoJson(data, {
             style:{
                 radius: 5,
-                fillColor:"#ff7f00",
+                fillColor:"blue",
                 color: "#000",
                 weight: 0,
                 opacity: 0,
@@ -56,10 +61,9 @@
             }
         }).addTo(map)
         });
-       
-        
+           
         //This links to data.lacity.org 
-        /*
+        
        var pizzalocations = $.getJSON('https://data.lacity.org/resource/66es-k6kk.json', function(data) {
 	           $.each(data, function(index, value) {
                 L.circle([value.location_1.latitude,value.location_1.longitude],100,
@@ -72,7 +76,7 @@
                ).addTo(map).bindPopup(value.business_name);
   	     });
         });
-        */
+      
 	</script>
 </body>
 </html>
